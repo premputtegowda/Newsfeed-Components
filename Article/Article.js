@@ -99,6 +99,8 @@ function createArticle(obj) {
   const paragraph2 = document.createElement('p');
   const paragraph3 = document.createElement('p');
   const spanEl = document.createElement('span')
+  //stretch
+  const closeBtn = document.createElement('span')
 
   //add classes
   articleDiv.classList.add('article');
@@ -106,6 +108,8 @@ function createArticle(obj) {
   datePara.classList.add('date');
   spanEl.classList.add('expandButton');
   
+  //stretch
+  closeBtn.classList.add('close')
   //add text content
   //append
 
@@ -115,13 +119,16 @@ function createArticle(obj) {
   articleDiv.appendChild(paragraph2);
   articleDiv.appendChild(paragraph3);
   articleDiv.append(spanEl);
-
+  articleDiv.append(closeBtn)
+  ;
   titleEl.textContent = obj.title;
   datePara.textContent = obj.date;
   paragraph1.textContent = obj.firstParagraph;
   paragraph2.textContent = obj.secondParagraph;
   paragraph3.textContent = obj.thirdParagraph;
   spanEl.textContent = '\u25B2';
+  //stretch
+  closeBtn.textContent='\u2573';
 
   
   
@@ -166,3 +173,15 @@ data.forEach(item => {
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+
+const closeButton = document.querySelectorAll('.close');
+closeButton.forEach(item=> {
+  item.addEventListener('click',(e)=>{
+    e.stopPropagation()
+    if(e.target.classList.contains('close')){
+  e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+    }
+    
+  })
+})

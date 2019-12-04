@@ -70,3 +70,17 @@ function createMenu(arr){
 
   
 */
+
+
+/
+
+
+
+  gsap.fromTo(".menu", {x:-400},{x:0, duration: 3});
+  
+
+  
+
+
+
+
