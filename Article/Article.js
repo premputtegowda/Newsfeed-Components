@@ -85,12 +85,89 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Added by Prem Krishna',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+/* Step 1: Create a function that creates a component. You will want your component to look like the template below: */
+
+function createArticle(obj) {
+  //create elements
+  const articleDiv = document.createElement('div');
+  const titleEl = document.createElement('h2');
+  const datePara = document.createElement('p');
+  const paragraph1 = document.createElement('p');
+  const paragraph2 = document.createElement('p');
+  const paragraph3 = document.createElement('p');
+  const spanEl = document.createElement('span')
+  //stretch
+  const closeBtn = document.createElement('span')
+
+  //add classes
+  articleDiv.classList.add('article');
   
-  <div class="article">
+  datePara.classList.add('date');
+  spanEl.classList.add('expandButton');
+  
+  //stretch
+  closeBtn.classList.add('close')
+  //add text content
+  //append
+
+  articleDiv.appendChild(titleEl);
+  articleDiv.appendChild(datePara);
+  articleDiv.appendChild(paragraph1);
+  articleDiv.appendChild(paragraph2);
+  articleDiv.appendChild(paragraph3);
+  articleDiv.append(spanEl);
+  articleDiv.append(closeBtn)
+  ;
+  titleEl.textContent = obj.title;
+  datePara.textContent = obj.date;
+  paragraph1.textContent = obj.firstParagraph;
+  paragraph2.textContent = obj.secondParagraph;
+  paragraph3.textContent = obj.thirdParagraph;
+  spanEl.textContent = '\u25B2';
+  //stretch
+  closeBtn.textContent='\u2573';
+
+  
+  
+
+  //Step 2
+
+  spanEl.addEventListener('click',()=>{
+    articleDiv.classList.toggle('article-open')
+  })
+  //Step 3
+  return articleDiv
+  
+}
+  
+/* Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div. */
+
+const articlesDiv = document.querySelector('.articles')
+
+data.forEach(item => {
+  articlesDiv.appendChild(createArticle(item))
+  
+})
+ /* <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
 
@@ -107,8 +184,20 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+
+const closeButton = document.querySelectorAll('.close');
+closeButton.forEach(item=> {
+  item.addEventListener('click',(e)=>{
+    e.stopPropagation()
+    if(e.target.classList.contains('close')){
+  e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+    }
+    
+  })
+})
