@@ -71,12 +71,19 @@ function createMenu(arr){
   
 */
 
+const menuButton = document.querySelector('.menu');
+var t1 = gsap.fromTo('.menu',{width:0},{width:300, duration: 5})
+menuButton.onclick = () => t1.play()
+  
+ 
 
-/
 
 
 
-  gsap.fromTo(".menu", {x:-400},{x:0, duration: 3});
+
+
+
+  
   
 
   
